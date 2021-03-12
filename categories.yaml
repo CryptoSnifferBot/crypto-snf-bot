@@ -1,0 +1,4 @@
+# categories.yaml file
+startText: Hi!, My name is Mumu coin-sniffing, type /help to understand me better
+helpText: "*/help* - Return commands available. <br> */start* - Start and presentation.
+  <br>*/coin* <symbol> - Returns the value of the entered currency."
