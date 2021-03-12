@@ -1,2 +1,4 @@
 # crypto-snf-bot
-Cryptocurrency Sniffer Bot.
+Cryptocurrency Sniffer Bot
+=]
+
