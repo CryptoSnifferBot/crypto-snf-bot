@@ -1,3 +1,5 @@
+from src.func_bot import Func_bot
+
 from telegram import Update, Bot
 from telegram.ext import Updater, CommandHandler, CallbackContext
 import yaml
@@ -20,7 +22,8 @@ class Commands():
         """Send a requested coin value when the command /coin <symbol> is issued."""
         try:
             coin = context.args[0]
-            coin_result = coin_value(coin)
+            func_bot = Func_bot()
+            coin_result = func_bot.coin_value(coin)
             if coin_result == '{}':
                 update.message.reply_text('Coin not found')
         except (IndexError, ValueError):
