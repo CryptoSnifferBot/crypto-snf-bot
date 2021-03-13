@@ -11,6 +11,7 @@ class Server():
         dispatcher.add_handler(CommandHandler("start", Commands.start_command))
         dispatcher.add_handler(CommandHandler("coin", Commands.coin_command))
         dispatcher.add_handler(CommandHandler("help", Commands.help_command))
+        dispatcher.add_handler(CommandHandler("set", Commands.set_command))
 
         # Start the Bot
         config.token.start_polling()
