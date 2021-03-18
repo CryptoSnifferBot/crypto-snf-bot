@@ -1,4 +1,5 @@
 import config.configs as config
+import json
 
 class Func_bot():
     def __init__(self):
@@ -12,7 +13,29 @@ class Func_bot():
         except:
             result = '{}'
         return result
-        
+
+
+    def trending_value(self):
+        try:
+            result = self.list_trending_coins()
+            trend_list = [x['item']['name'] for x in result['coins']]
+
+            txt = 'Trending: \n'
+            
+            for i, item in enumerate(trend_list, start=1):
+                txt += f' {i} - {item} \n'
+
+            self.send_message(txt)
+        except:
+            result = '{}'
+        return result
+
+
+    def list_trending_coins(self):
+        """Get top 7 trending coin searches"""
+        result = config.cg.get_search_trending()
+        return result
+
 
     def list_coins(self):
         """List all coins in API"""
@@ -23,3 +46,4 @@ class Func_bot():
     def send_message(self, msg) -> None:
         """Send the message forwarded to the function"""
         config.bot.send_message(config.GROUP_ID, text=msg)
+
