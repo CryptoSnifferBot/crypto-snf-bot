@@ -28,3 +28,11 @@ class Commands():
                 update.message.reply_text('Coin not found')
         except (IndexError, ValueError):
             update.message.reply_text('Usage: /coin <symbol>')
+
+    def trending_command(update: Update, context: CallbackContext) -> None:
+        """Send a requested coin value when the command /trending is issued."""
+        try:
+            func_bot = Func_bot()
+            trending_coins_result = func_bot.trending_value()
+        except (IndexError, ValueError):
+            update.message.reply_text('Error when get trending coins.')
