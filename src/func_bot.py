@@ -21,11 +21,13 @@ class Func_bot():
     
     def check_backgroud_coin(self, symbol):
         """Call the send_message function to send the coin value and return coin value"""
-        try:
-            id = [c for c in self.list_coins() if c['symbol'] == symbol.lower()][0]['id']
-            result = config.cg.get_price(ids=id, vs_currencies='usd')
-        except:
-            result = '{}'
+        print(symbol)
+        id = [c for c in self.list_coins() if c['symbol'] == symbol.lower()][0]['id']
+        result = config.cg.get_price(ids=id, vs_currencies='usd')
+        result = result[id]['usd']
+    #   except:
+    #         result = '{}'
+        print(result)
         return result
         
 
@@ -57,10 +59,31 @@ class Func_bot():
         self.send_message(f"The Value {coin.title()} passed the target of ${float(self.valueb):,.4f}")
         self.coin_value(self.idb)
 
+
     def awaits_value_backgroud(self, id, value):
         self.idb = id
         self.valueb = value
         print(f'Set Value the with Success {id} {value}' )
         awaiting_value = threading.Thread(target=self.my_poll)
         awaiting_value.start()
+
+
+    def my_poll_cron(self):
+        coin = [c for c in self.list_coins() if c['symbol'] == self.idbb.lower()][0]['id']
+        polling.poll(
+            lambda: self.send_message(f"The Value {coin.title()} is ${float(self.check_backgroud_coin(self.idbb)):,.4f}"),
+            step=60*60,
+            poll_forever=True
+        )
+        
+        self.coin_value(self.idb)
+
+    
+    def awaits_value_backgroud_cron(self, id):
+        self.idbb = id
+        print(f'Successfully scheduled coin {id} ' )
+        awaiting_value = threading.Thread(target=self.my_poll_cron)
+        awaiting_value.start()
+
+
 
