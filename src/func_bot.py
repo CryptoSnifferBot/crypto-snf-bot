@@ -1,4 +1,5 @@
 import config.configs as config
+import json
 
 import threading
 import polling
@@ -18,19 +19,39 @@ class Func_bot():
             result = '{}'
         return result
 
-    
+
     def check_backgroud_coin(self, symbol):
         """Call the send_message function to send the coin value and return coin value"""
         print(symbol)
         id = [c for c in self.list_coins() if c['symbol'] == symbol.lower()][0]['id']
         result = config.cg.get_price(ids=id, vs_currencies='usd')
         result = result[id]['usd']
-    #   except:
-    #         result = '{}'
         print(result)
         return result
         
 
+    def trending_value(self):
+        try:
+            result = self.list_trending_coins()
+            trend_list = [x['item']['name'] for x in result['coins']]
+
+            txt = 'Trending: \n'
+            
+            for i, item in enumerate(trend_list, start=1):
+                txt += f' {i} - {item} \n'
+
+            self.send_message(txt)
+        except:
+            result = '{}'
+        return result
+
+
+    def list_trending_coins(self):
+        """Get top 7 trending coin searches"""
+        result = config.cg.get_search_trending()
+        return result
+
+                              
     def list_coins(self):
         """List all coins in API"""
         result = config.cg.get_coins_list()
@@ -42,7 +63,7 @@ class Func_bot():
         config.bot.send_message(config.GROUP_ID, text=msg)
 
 
-    def is_correct_response(self, response):
+   def is_correct_response(self, response):
         """Check that the response returned 'success'"""
         coin = list(response.keys())[0]
         return float(response[coin]['usd']) > float(self.valueb)
@@ -84,6 +105,3 @@ class Func_bot():
         print(f'Successfully scheduled coin {id} ' )
         awaiting_value = threading.Thread(target=self.my_poll_cron)
         awaiting_value.start()
-
-
-

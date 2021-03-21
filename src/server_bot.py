@@ -10,6 +10,7 @@ class Server():
 
         dispatcher.add_handler(CommandHandler("start", Commands.start_command))
         dispatcher.add_handler(CommandHandler("coin", Commands.coin_command))
+        dispatcher.add_handler(CommandHandler("trending", Commands.trending_command))
         dispatcher.add_handler(CommandHandler("help", Commands.help_command))
         dispatcher.add_handler(CommandHandler("set", Commands.set_command))
         dispatcher.add_handler(CommandHandler("cron", Commands.cron_command))
