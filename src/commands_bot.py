@@ -31,15 +31,21 @@ class Commands():
     
     def set_command(update: Update, context: CallbackContext) -> None:
         """Send a requested coin value when the command /set <symbol> <final price> issued."""
-        coin = context.args[0]
-        initial_price = context.args[1]
+        try:
+            coin = context.args[0]
+            initial_price = context.args[1]
 
-        if 'k' in initial_price.lower():
-            initial_price = initial_price.replace('k', '000')
+            if 'k' in initial_price.lower():
+                initial_price = initial_price.replace('k', '000')
+            
+            if ',' in initial_price.lower():
+                initial_price = initial_price.replace(',', '.')
 
-        update.message.reply_text('Set Value the with Success')
-        set_bg_call = Func_bot()
-        set_bg_call.awaits_value_backgroud(coin, initial_price)
+            update.message.reply_text('Set Value the with Success')
+            set_bg_call = Func_bot()
+            set_bg_call.awaits_value_backgroud(coin, initial_price)
+        except (IndexError, ValueError):
+            update.message.reply_text('Usage: /set <symbol> <final price>')
 
 
     def cron_command(update: Update, context: CallbackContext) -> None:

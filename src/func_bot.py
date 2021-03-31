@@ -21,11 +21,11 @@ class Func_bot():
 
     def check_backgroud_coin(self, symbol):
         """Call the send_message function to send the coin value and return coin value"""
-        print(symbol)
+        #print(symbol)
         id = [c for c in self.list_coins() if c['symbol'] == symbol.lower()][0]['id']
         result = config.cg.get_price(ids=id, vs_currencies='usd')
         result = result[id]['usd']
-        print(result)
+        #print(result)
         return result
 
     def return_id_to_symbol(self, symbol):
@@ -68,8 +68,7 @@ class Func_bot():
 
     def is_correct_response(self, response):
         """Check that the response returned 'success'"""
-        coin = list(response.keys())[0]
-        return float(response[coin]['usd']) > float(self.valueb)
+        return float(response) > float(self.valueb)
 
     def my_poll(self):
         polling.poll(
@@ -87,7 +86,7 @@ class Func_bot():
     def awaits_value_backgroud(self, id, value):
         self.idb = id
         self.valueb = value
-        print(f'Set Value the with Success {id} {value}' )
+        #print(f'Set Value the with Success {id} {value}' )
         awaiting_value = threading.Thread(target=self.my_poll)
         awaiting_value.start()
 
