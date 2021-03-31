@@ -1,7 +1,9 @@
 import config.configs as config
-
+from src.func_bot import Func_bot
 from src.commands_bot import Commands
 from telegram.ext import Updater, CommandHandler, CallbackContext
+import os
+import json
 
 class Server():
     def main(self):
@@ -14,8 +16,18 @@ class Server():
         dispatcher.add_handler(CommandHandler("help", Commands.help_command))
         dispatcher.add_handler(CommandHandler("set", Commands.set_command))
         dispatcher.add_handler(CommandHandler("cron", Commands.cron_command))
+        dispatcher.add_handler(CommandHandler("delcron", Commands.delcron_command))
+
+        if not os.path.exists('thread_cron_file.json'):
+            with open("thread_cron_file.json", "w") as fl:
+                dtc = {"threads": []}
+                json.dump(dtc, fl)
+
+        polling_cron = Func_bot()
+        polling_cron.threads_cron_bg()
 
         # Start the Bot
+        print('Server Subiu')
         config.token.start_polling()
 
         # Run the bot until you press Ctrl-C or the process receives SIGINT,

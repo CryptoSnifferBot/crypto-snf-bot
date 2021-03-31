@@ -30,7 +30,7 @@ class Commands():
 
     
     def set_command(update: Update, context: CallbackContext) -> None:
-        """Send a requested coin value when the command /set <symbol> <initial price> <final price> issued."""
+        """Send a requested coin value when the command /set <symbol> <final price> issued."""
         coin = context.args[0]
         initial_price = context.args[1]
 
@@ -44,12 +44,15 @@ class Commands():
 
     def cron_command(update: Update, context: CallbackContext) -> None:
         """Send a requested coin value when the command /set <symbol> <initial price> <final price> issued."""
-        coin = context.args[0]
-
+        try:
+            coin = context.args[0]
+        except:
+            update.message.reply_text('Usage: /coin <symbol>', parse_mode=ParseMode.MARKDOWN)
+        
         update.message.reply_text('Set Value the with Success')
         set_bg_call = Func_bot()
-        set_bg_call.awaits_value_backgroud_cron(coin)
-        update.message.reply_text('Usage: /coin <symbol>', parse_mode=ParseMode.MARKDOWN)
+        set_bg_call.add_coin_in_cron(coin)
+
 
     def trending_command(update: Update, context: CallbackContext) -> None:
         """Send a requested coin value when the command /trending is issued."""
@@ -59,3 +62,12 @@ class Commands():
         except (IndexError, ValueError):
             update.message.reply_text('Error when get trending coins.', parse_mode=ParseMode.MARKDOWN)
 
+
+    def delcron_command(update: Update, context: CallbackContext) -> None:
+        """Send a requested coin value when the command /set <symbol> <initial price> <final price> issued."""
+        coin = context.args[0]
+
+        update.message.reply_text('Delete Value the with Success')
+        set_bg_call = Func_bot()
+        set_bg_call.delete_thread(coin)
+        update.message.reply_text('Usage: /delcron <symbol> or Cron not Exists', parse_mode=ParseMode.MARKDOWN)
