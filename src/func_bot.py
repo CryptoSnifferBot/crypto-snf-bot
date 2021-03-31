@@ -1,6 +1,5 @@
 import config.configs as config
 import json
-
 import threading
 import polling
 
@@ -28,7 +27,11 @@ class Func_bot():
         result = result[id]['usd']
         print(result)
         return result
-        
+
+    def return_id_to_symbol(self, symbol):
+        id = [c for c in self.list_coins() if c['symbol'] == symbol.lower()][0]['id']
+        return id
+
 
     def trending_value(self):
         try:
@@ -63,7 +66,7 @@ class Func_bot():
         config.bot.send_message(config.GROUP_ID, text=msg)
 
 
-   def is_correct_response(self, response):
+    def is_correct_response(self, response):
         """Check that the response returned 'success'"""
         coin = list(response.keys())[0]
         return float(response[coin]['usd']) > float(self.valueb)
@@ -89,19 +92,56 @@ class Func_bot():
         awaiting_value.start()
 
 
-    def my_poll_cron(self):
-        coin = [c for c in self.list_coins() if c['symbol'] == self.idbb.lower()][0]['id']
+    def cron_json_send(self):
+        result, fl = self.read_json()
+
+
+    def polling_cron(self):
         polling.poll(
-            lambda: self.send_message(f"The Value {coin.title()} is ${float(self.check_backgroud_coin(self.idbb)):,.4f}"),
+            lambda: self.send_message_cron_bg(),
             step=60*60,
             poll_forever=True
         )
-        
-        self.coin_value(self.idb)
 
     
-    def awaits_value_backgroud_cron(self, id):
-        self.idbb = id
-        print(f'Successfully scheduled coin {id} ' )
-        awaiting_value = threading.Thread(target=self.my_poll_cron)
-        awaiting_value.start()
+    def read_json(self):
+        fl = open("thread_cron_file.json", "r+")
+        data = json.load(fl)
+
+        return data, fl
+
+
+    def add_coin_in_cron(self, symbol):
+        data, fl = self.read_json()
+        id = self.return_id_to_symbol(symbol)
+        list_ids = [i['id'] for i in data['threads']]
+        
+        if id in list_ids:
+            self.send_message('Ja existe essa moeda no cron')
+        else:
+            dtc = {'symbol': symbol, 'id': id}
+            data['threads'].append(dtc)
+
+            fl.seek(0)
+            json.dump(data, fl)
+        
+   
+    def delete_thread(self, symbol):
+        data = self.read_json()[0]    
+
+        res = list(filter(lambda i: i['symbol'] != symbol, data['threads']))
+        data['threads'] = res
+        
+        with open("thread_cron_file.json", "w") as fl:
+            json.dump(data, fl)
+
+
+    def send_message_cron_bg(self):
+        data, fl = self.read_json()
+        coins = [self.coin_value(coin['symbol']) for coin in data['threads']]
+
+
+    def threads_cron_bg(self):
+        print('Subiu o Cron')
+        bg_cron = threading.Thread(target=self.polling_cron)
+        bg_cron.start()
