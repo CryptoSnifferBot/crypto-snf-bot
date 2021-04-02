@@ -73,7 +73,7 @@ class Commands():
         """Send a requested coin value when the command /set <symbol> <initial price> <final price> issued."""
         coin = context.args[0]
 
-        update.message.reply_text('Agendamento da moeda ${coin} removido com sucesso!')
+        update.message.reply_text('Agendamento da moeda removido com sucesso!')
         set_bg_call = Func_bot()
         set_bg_call.delete_thread(coin)
         update.message.reply_text('Uso: /delcron <símbolo> ou Cron não existe!', parse_mode=ParseMode.MARKDOWN)
