@@ -24,9 +24,9 @@ class Commands():
             func_bot = Func_bot()
             coin_result = func_bot.coin_value(coin)
             if coin_result == '{}':
-                update.message.reply_text('Coin not found')
+                update.message.reply_text('Moeda não encontrada. Verifique se o símbolo está correto e tente novamente.')
         except (IndexError, ValueError):
-            update.message.reply_text('Usage: /coin <symbol>')
+            update.message.reply_text('Uso: /coin <símbolo>')
 
     
     def set_command(update: Update, context: CallbackContext) -> None:
@@ -41,11 +41,11 @@ class Commands():
             if ',' in initial_price.lower():
                 initial_price = initial_price.replace(',', '.')
 
-            update.message.reply_text('Set Value the with Success')
+            update.message.reply_text('Valor definido com sucesso.')
             set_bg_call = Func_bot()
             set_bg_call.awaits_value_backgroud(coin, initial_price)
         except (IndexError, ValueError):
-            update.message.reply_text('Usage: /set <symbol> <final price>')
+            update.message.reply_text('Uso: /set <símbolo> <valor final>')
 
 
     def cron_command(update: Update, context: CallbackContext) -> None:
@@ -53,9 +53,9 @@ class Commands():
         try:
             coin = context.args[0]
         except:
-            update.message.reply_text('Usage: /coin <symbol>', parse_mode=ParseMode.MARKDOWN)
+            update.message.reply_text('Uso: /coin <símbolo>', parse_mode=ParseMode.MARKDOWN)
         
-        update.message.reply_text('Set Value the with Success')
+        update.message.reply_text('Valor definido com sucesso.')
         set_bg_call = Func_bot()
         set_bg_call.add_coin_in_cron(coin)
 
@@ -66,14 +66,14 @@ class Commands():
             func_bot = Func_bot()
             trending_coins_result = func_bot.trending_value()
         except (IndexError, ValueError):
-            update.message.reply_text('Error when get trending coins.', parse_mode=ParseMode.MARKDOWN)
+            update.message.reply_text('Erro ao buscar top 7 moedas.', parse_mode=ParseMode.MARKDOWN)
 
 
     def delcron_command(update: Update, context: CallbackContext) -> None:
         """Send a requested coin value when the command /set <symbol> <initial price> <final price> issued."""
         coin = context.args[0]
 
-        update.message.reply_text('Delete Value the with Success')
+        update.message.reply_text('Agendamento da moeda ${coin} removido com sucesso!')
         set_bg_call = Func_bot()
         set_bg_call.delete_thread(coin)
-        update.message.reply_text('Usage: /delcron <symbol> or Cron not Exists', parse_mode=ParseMode.MARKDOWN)
+        update.message.reply_text('Uso: /delcron <símbolo> ou Cron não existe!', parse_mode=ParseMode.MARKDOWN)

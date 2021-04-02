@@ -1,4 +1,3 @@
-# crypto-snf-bot
-Cryptocurrency Sniffer Bot
-=]
+# CryptoBot
 
+É um bot criado para facilitar a vida de quem investe em criptomoedas.

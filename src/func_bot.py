@@ -79,7 +79,7 @@ class Func_bot():
         )
         coin = [c for c in self.list_coins() if c['symbol'] == self.idb.lower()][0]['id']
         
-        self.send_message(f"The Value {coin.title()} passed the target of ${float(self.valueb):,.4f}")
+        self.send_message(f"O valor da moeda {coin.title()} atingiu o alvo de ${float(self.valueb):,.4f}!!")
         self.coin_value(self.idb)
 
 
@@ -116,7 +116,7 @@ class Func_bot():
         list_ids = [i['id'] for i in data['threads']]
         
         if id in list_ids:
-            self.send_message('Ja existe essa moeda no cron')
+            self.send_message('Essa moeda já existe no cron. Agora é só aguardar!')
         else:
             dtc = {'symbol': symbol, 'id': id}
             data['threads'].append(dtc)
