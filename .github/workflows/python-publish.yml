@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [ main ]
 
+
+
 jobs:
   deploy:
     name: Deploy
@@ -25,7 +27,9 @@ jobs:
       #     TARGET: ${{ secrets.REMOTE_TARGET }}
 
       - name: echo
-        run: echo ${{ secrets.REMOTE_HOST }} - SSH
+        env: 
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        run: echo $REMOTE_HOST - SSH
    
       - name: Git Clone
         run: ls
