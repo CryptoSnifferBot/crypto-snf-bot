@@ -8,3 +8,4 @@ helpText: "*/help* - Exibe os comandos disponíveis.
 \n*/cron* <símbolo> - Agenda notificações do valor da moeda solicitada de uma em uma hora.
 \n*/delcron* <símbolo> - Remove a moeda do agendamento no cron.
 "
+coinValue: f'{id.title()} está com o valor de ${result[id]["usd"]:,.4f}'
