@@ -13,7 +13,7 @@ class Func_bot():
         try:
             id = [c for c in self.list_coins() if c['symbol'] == symbol.lower()][0]['id']
             result = config.cg.get_price(ids=id, vs_currencies='usd')
-            self.send_message(f'The value of {id.title()} is ${result[id]["usd"]:,.4f}')
+            self.send_message(f'**{id.title()}** está com o valor de ${result[id]["usd"]:,.4f}')
         except:
             result = '{}'
         return result
