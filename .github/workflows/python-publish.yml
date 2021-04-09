@@ -37,7 +37,7 @@ jobs:
 
           working-directory: /home/ubuntu/crypto-snf-bot
           command: |
-                  docker build -t allanjuliato/snfcoin:1.0 . && \
+                  docker build -t allanjuliato/snfcoin:1.0 .
                   docker rm -f coinsnf
                   docker run --name coinsnf -t \
                     --restart always \
