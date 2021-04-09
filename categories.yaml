@@ -3,8 +3,8 @@ startText: Hi!, My name Cheirador de Moedas, type /help to understand me better
 helpText: "*/help* - Return commands available.
 \n*/start* - Start and presentation.
 \n*/coin* <symbol> - Returns the value of the entered currency.
-\n */trending* - Returns the value of the 7 best currencies at the moment
-\n */set* <symbol> <final price> - Informs the moment when the currency reaches the given value
-\n */cron* <symbol> - Schedule the currency to report the value of one in an hour
-\n */delcron* <symbol> - Remove a currency from the schedule
+\n*/trending* - Returns the value of the 7 best currencies at the moment
+\n*/set* <symbol> <final price> - Informs the moment when the currency reaches the given value
+\n*/cron* <symbol> - Schedule the currency to report the value of one in an hour
+\n*/delcron* <symbol> - Remove a currency from the schedule
 "
