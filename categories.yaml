@@ -1,7 +1,7 @@
 # categories.yaml file
 startText: Olá!, Eu sou o CriptoBot, digite /help para me entender melhor
 helpText: "*/help* - Exibe os comandos disponíveis.
-\n*/start* - Inicia a apresentação.
+\n*/start* - Inicia a apresentação do bot.
 \n*/coin* <símbolo> - Exibe o valor atual da moeda solicitada. 
 \n*/trending* - Exibe as 7 moedas mais populares no CoinGecko conforme pesquisas dos usuários nas últimas 24 horas.
 \n*/set* <símbolo> <valor final> - Informa quando a moeda atigir ou ultrapassar valor definido.
