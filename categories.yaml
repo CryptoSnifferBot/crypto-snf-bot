@@ -1,5 +1,5 @@
 # categories.yaml file
-startText: Olá!, Eu sou o Cheirador de Moedas, digite /help para me entender melhor
+startText: Olá!, Eu sou o CriptoBot, digite /help para me entender melhor
 helpText: "*/help* - Exibe os comandos disponíveis.
 \n*/start* - Inicia a apresentação.
 \n*/coin* <símbolo> - Exibe o valor atual da moeda solicitada. 
