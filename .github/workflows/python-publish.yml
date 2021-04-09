@@ -27,8 +27,10 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
 
           working-directory: /home/ubuntu/crypto-snf-bot
-          command: ls -al
+          command: touch text.txt
           comment: Hello world!
+          
+          
          
   
 
