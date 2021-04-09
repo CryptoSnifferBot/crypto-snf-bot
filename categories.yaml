@@ -1,10 +1,10 @@
 # categories.yaml file
-startText: Hi!, My name Cheirador de Moedas, type /help to understand me better
-helpText: "*/help* - Return commands available.
-\n*/start* - Start and presentation.
-\n*/coin* <symbol> - Returns the value of the entered currency.
-\n*/trending* - Returns the value of the 7 best currencies at the moment
-\n*/set* <symbol> <final price> - Informs the moment when the currency reaches the given value
-\n*/cron* <symbol> - Schedule the currency to report the value of one in an hour
-\n*/delcron* <symbol> - Remove a currency from the schedule
+startText: Olá!, Eu sou o Cheirador de Moedas, digite /help para me entender melhor
+helpText: "*/help* - Exibe os comandos disponíveis.
+\n*/start* - Inicia a apresentação.
+\n*/coin* <símbolo> - Exibe o valor atual da moeda solicitada. 
+\n */trending* - Exibe as 7 moedas mais populares no CoinGecko conforme pesquisas dos usuários nas últimas 24 horas.
+\n */set* <símbolo> <valor final> - Informa quando a moeda atigir ou ultrapassar valor definido.
+\n */cron* <símbolo> - Agenda notificações do valor da moeda solicitada de uma em uma hora.
+\n */delcron* <símbolo> - Remove a moeda do agendamento no cron.
 "
