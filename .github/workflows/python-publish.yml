@@ -26,10 +26,10 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
 
-      - name: echo
-        env: 
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        run: echo $REMOTE_HOST - SSH
-   
-      - name: Git Clone
-        run: touch text.txt
+        - name: echo
+          env: 
+            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          run: echo $REMOTE_HOST - SSH
+    
+        - name: Git Clone
+          run: touch text.txt
