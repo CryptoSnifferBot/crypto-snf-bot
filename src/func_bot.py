@@ -13,7 +13,7 @@ class Func_bot():
         try:
             id = [c for c in self.list_coins() if c['symbol'] == symbol.lower()][0]['id']
             result = config.cg.get_price(ids=id, vs_currencies='usd')
-            self.send_message(f'*{id.title()}* está com o valor de ${result[id]["usd"]:,.4f}')
+            self.send_message(f'{id.title()} está com o valor de ${result[id]["usd"]:,.4f}')
         except:
             result = '{}'
         return result
@@ -63,7 +63,7 @@ class Func_bot():
 
     def send_message(self, msg) -> None:
         """Send the message forwarded to the function"""
-        config.bot.send_message(config.GROUP_ID, text=msg, parse_mode=ParseMode.MARKDOWN)
+        config.bot.send_message(config.GROUP_ID, text=msg)
 
 
     def is_correct_response(self, response):
