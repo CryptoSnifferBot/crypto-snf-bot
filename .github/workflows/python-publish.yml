@@ -36,8 +36,14 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
 
           working-directory: /home/ubuntu/crypto-snf-bot
-          command: touch text.txt
-          comment: Hello world!
+          command: docker build -t allanjuliato/snfcoin:1.0 .
+          command: docker rm -f coinsnf
+          command: docker run --name coinsnf -t \
+                    --restart always \
+                    -e API_TELEGRAM_TOKEN=${{ secrets.API_TELEGRAM_TOKEN }} \
+                    -e GROUP_ID=${{ secrets.GROUP_ID }} \
+                    -d allanjuliato/snfcoin:1.0
+          
           
           
          
