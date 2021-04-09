@@ -29,6 +29,6 @@ jobs:
           working-directory: /home/ubuntu/crypto-snf-bot
           command: ls -al
           comment: Hello world!
-          command: touch text.txt
+         
   
 
